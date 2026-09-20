@@ -210,4 +210,22 @@ def get_above_average_movies(movies):
     return {
         movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg_res
     }
+    
+# Этап 7
+def all_genres(movies):
+    genres_set = set()
+    for movie in movies:
+        genres_set = genres_set | movie["genres"]
+    return genres_set
+
+
+def common_actors(movie1, movie2):
+    return set(movie1["actors"]) & set(movie2["actors"])
+
+
+def genres_only_in_one(movies_a, movies_b):
+    genres_a = all_genres(movies_a)
+    genres_b = all_genres(movies_b)
+
+    return genres_a - genres_b
 
