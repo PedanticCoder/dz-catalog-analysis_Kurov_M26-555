@@ -183,4 +183,31 @@ def titles_sorted_by_rating(movies):
 def top_n_by_rating(movies, n=3):
     sorted_movies = sorted(movies, key=lambda m: m["rating"], reverse=True)
     return [(movie["title"], movie["rating"]) for movie in sorted_movies[:n]]
+    
+# Этап 6
+def count_by_genre(movies):
+    genres_dict = dict()
+
+    for movie in movies:
+        for genre in movie["genres"]:
+            genres_dict[genre] = genres_dict.get(genre, 0) + 1
+
+    return genres_dict
+
+def actor_filmography(movies):
+    actors_dict = dict()
+
+    for movie in movies:
+        for actor in movie["actors"]:
+            current_films = actors_dict.get(actor, [])
+            current_films.append(movie["title"])
+            actors_dict[actor] = current_films
+
+    return actors_dict
+
+def get_above_average_movies(movies):
+    avg_res = average_rating(movies)
+    return {
+        movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg_res
+    }
 
